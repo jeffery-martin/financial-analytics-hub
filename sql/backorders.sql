@@ -1,4 +1,3 @@
-
 CREATE OR REPLACE TABLE analytics.gold.backorders
 USING DELTA
 AS

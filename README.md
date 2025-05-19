@@ -36,18 +36,18 @@ A daily-refreshing dashboard that tracks quarter-to-date (QTD) revenue, backorde
 
 ```
 projects/
-├── daily-sales-report/              <- Daily QTD revenue & production tracking
+├── daily-sales-report/             <- Daily QTD revenue & production trend visibility
 ├── regional_pl_dashboard/          <- Region-level monthly P&L and allocations
 scripts/                            <- SQL and PySpark jobs
 │   ├── aop_pipeline.ipynb
-│   ├── rlm_pipeline.ipynb
+│   ├── r12_pipeline.ipynb
 │   ├── month_close_pl.ipynb
 │   ├── month_close_spend.ipynb
 │   └── notebook_debug_script.ipynb
 sql/                                <- Reusable Databricks SQL logic
 │   ├── backorders.sql
 │   ├── date_table_build.sql
-│   ├── dtp_pumps_qtd_split.sql
+│   ├── dtc_product_qtd_split.sql
 │   ├── qtd_revenue_vs_pypq.sql
 │   ├── qtd_production_trend.sql
 README.md                           <- Root overview (this file)

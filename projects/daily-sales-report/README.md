@@ -60,9 +60,9 @@ projects/
 └── revenue-dashboard/
     ├── README.md                      <- This file
     ├── workflowdiagram.png            <- Pipeline architecture
-    ├── revenuedashboard1.png          <- Screenshot of main dashboard
-    ├── revenuedashboard2.png          <- Screenshot of current trend & variance charts
-    ├── revenuedashboard3.png          <- Screenshot of historical trends
+    ├── dailysalesreport1.png          <- Screenshot of main dashboard
+    ├── dailysalesreport2.png          <- Screenshot of current trend & variance charts
+    ├── dailysalesreport3.png          <- Screenshot of historical trends
 scripts/
 └── aop_load_pipeline.py              <- AOP Delta pipeline
 └── r12_revenue_pipeline.py           <- Regionsl QTD refresh job

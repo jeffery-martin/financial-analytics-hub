@@ -49,8 +49,6 @@ projects/
 │   ├── dailysalesreport2.png
 │   ├── dailysalesreport3.png
 │   └── workflowdiagram.png
-├── month-end-close/               <- Month-end P&L automation and target comparison
-├── regional-profitability/        <- Region-level profitability and spend tracking
 ├── saas-kpi-dashboard/            <- Simulated SaaS analytics with ARR, churn, CAC, LTV
 │   ├── aggregations.ipynb
 │   ├── unit_economics.ipynb

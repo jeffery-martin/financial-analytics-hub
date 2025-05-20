@@ -57,7 +57,7 @@ This dataset and pipeline enables you to answer:
 - Where are CAC payback periods too long to sustain?
 - What plan structures or billing frequencies are most retention-efficient?
 
-- ## 💼 Key Metrics Visualized
+## 💼 Key Metrics Visualized
 
 - **Customer Acquisition Cost (CAC)**
 - **Lifetime Value (LTV)**

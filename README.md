@@ -41,8 +41,13 @@ A daily-refreshing dashboard that tracks quarter-to-date (QTD) revenue, backorde
 ```
 projects/
 ├── daily-sales-report/             <- Daily QTD revenue & production trend visibility
+│   ├── DailySalesReport.pdf
+│   ├── README.md
 │   ├── aop.ipynb
 │   ├── r12_revenue.ipynb
+│   ├── dailysalesreport1.png
+│   ├── dailysalesreport2.png
+│   ├── dailysalesreport3.png
 │   └── workflowdiagram.png
 ├── month-end-close/               <- Month-end P&L automation and target comparison
 ├── regional-profitability/        <- Region-level profitability and spend tracking

@@ -13,6 +13,8 @@ I do not come from a SaaS company background, but this project reflects:
 - Familiarity with **pricing strategies** by plan tier and user count
 - Insight into **product usage telemetry**, feature adoption, and support effectiveness
 
+> **Note:** This project uses a snowflake schema to fully represent relationships across revenue, usage, and support. In a production BI setting, this could be refactored into a star schema for optimization.
+
 ---
 
 ## 📊 Dataset Structure

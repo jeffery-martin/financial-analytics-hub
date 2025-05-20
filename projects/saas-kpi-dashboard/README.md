@@ -170,3 +170,67 @@ This dataset and pipeline enables you to answer:
 ---
 
 Built to demonstrate my ability to model and communicate core SaaS economics using modern analytics tooling—from Python to PySpark to Power BI.
+# 📊 SaaS KPI Dashboard (Power BI)
+
+This dashboard visualizes the core unit economics and customer health metrics generated from the SaaS KPI data pipeline. Designed to provide strategic visibility into revenue efficiency, retention trends, and GTM performance across customer segments.
+
+---
+
+## 💼 Key Metrics Visualized
+
+- **Customer Acquisition Cost (CAC)**
+- **Lifetime Value (LTV)**
+- **CAC Payback Period**
+- **LTV:CAC Ratio**
+- **Churn Rate & Retention by Month**
+- **Customer Health Score**
+- **Support Sentiment & Usage Scoring**
+
+---
+
+## 📈 Dashboard Pages
+
+1. **Executive Overview**  
+   High-level LTV, CAC, and retention insights with filters for plan, billing cadence, and company size.
+
+2. **Customer Health & Churn**  
+   Cohort-based churn tracking, usage activity, and support sentiment overlays.
+
+3. **Segmented Unit Economics**  
+   LTV:CAC and CAC Payback sliced by product tier, billing frequency, industry, and size.
+
+4. **Acquisition Funnel** *(Planned)*  
+   Visual flow of user acquisition by stage and associated cost-to-convert.
+
+---
+
+## 🧱 Data Sources
+
+| File | Description |
+|------|-------------|
+| `customers.csv` | Master customer records |
+| `subscriptions.csv` | Subscription terms, plans, billing cycle |
+| `payments.csv` | Monthly recurring revenue and invoice data |
+| `support_interactions.csv` | Support ticket logs with sentiment scores |
+| Aggregated tables from: `unit_economics.ipynb`, `aggregations.ipynb`
+
+---
+
+## 🧮 Built With
+
+- **Power BI** for interactive dashboarding
+- **DAX** measures for dynamic KPI calculation
+- **Python/PySpark** generated tables and pre-aggregated metrics
+
+---
+
+## 🔜 Coming Next
+
+- Multi-period cohort retention analysis
+- Scenario analysis for pricing & plan structure changes
+- Embedded dashboard screenshots
+
+---
+
+> All visuals are based on fully synthetic data generated for demonstration purposes only.
+

@@ -1,3 +1,8 @@
+---
+layout: default
+title: 💼 Financial Analytics Hub
+---
+
 # 💼 Financial Analytics Hub
 
 Welcome to my public portfolio of financial analytics projects. This repository highlights the intersection of financial strategy, business performance management, and modern data infrastructure. From revenue pacing and target modeling to spend allocations and P&L automation, these projects are built to support better decision-making through trustworthy data and scalable pipelines.

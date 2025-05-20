@@ -22,13 +22,13 @@ The following CSVs were generated using a Python-based SaaS data simulator:
 
 | File                        | Description |
 |-----------------------------|-------------|
-| `customers_advanced.csv`    | Customer firmographics, acquisition channel, trial info |
-| `subscriptions_advanced.csv`| Initial subscriptions, plan upgrades, seat expansions |
-| `payments_advanced.csv`     | Monthly or annual billing records and statuses |
+| `customers.csv`             | Customer firmographics, acquisition channel, trial info |
+| `subscriptions.csv`         | Initial subscriptions, plan upgrades, seat expansions |
+| `payments.csv`              | Monthly or annual billing records and statuses |
 | `support_interactions.csv`  | Tickets by type, resolution status, sentiment |
 
-> ⚠️ `usage_events_advanced.csv` (1GB+) was excluded from GitHub due to size limits.  
-> 📥 [Download usage_events_advanced.csv from Google Drive](https://drive.google.com/file/d/1tyMmYg3rY6yupsCEscW0DMi7MWcURxe1/view?usp=drive_link)
+> ⚠️ `usage_events.csv` (1GB+) was excluded from GitHub due to size limits.  
+> 📥 [Download usage_events.csv from Google Drive](https://drive.google.com/file/d/1tyMmYg3rY6yupsCEscW0DMi7MWcURxe1/view?usp=drive_link)
 
 ---
 

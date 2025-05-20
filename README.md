@@ -1,6 +1,6 @@
 # 💼 Financial Analytics Hub
 
-Welcome to my public portfolio of financial analytics projects. This repository highlights the intersection of financial strategy, business performance management, and modern data infrastructure. From revenue pacing and target modeling to spend allocations and P\&L automation, these projects are built to support better decision-making through trustworthy data and scalable pipelines.
+Welcome to my public portfolio of financial analytics projects. This repository highlights the intersection of financial strategy, business performance management, and modern data infrastructure. From revenue pacing and target modeling to spend allocations and P&L automation, these projects are built to support better decision-making through trustworthy data and scalable pipelines.
 
 Each project blends technical execution — using Databricks, Delta Lake, and Power BI — with a finance-first lens to deliver insights that drive operational and strategic outcomes.
 
@@ -41,19 +41,27 @@ A daily-refreshing dashboard that tracks quarter-to-date (QTD) revenue, backorde
 ```
 projects/
 ├── daily-sales-report/             <- Daily QTD revenue & production trend visibility
-├── regional_pl_dashboard/          <- Region-level monthly P&L and allocations
-scripts/                            <- SQL and PySpark jobs
-│   ├── aop_pipeline.ipynb
-│   ├── r12_pipeline.ipynb
-│   ├── month_close_pl.ipynb
-│   ├── month_close_spend.ipynb
-│   └── notebook_debug_script.ipynb
+│   ├── aop.ipynb
+│   ├── r12_revenue.ipynb
+│   └── workflowdiagram.png
+├── month-end-close/               <- Month-end P&L automation and target comparison
+├── regional-profitability/        <- Region-level profitability and spend tracking
+├── saas-kpi-dashboard/            <- Simulated SaaS analytics with ARR, churn, CAC, LTV
+│   ├── aggregations.ipynb
+│   ├── unit_economics.ipynb
+│   ├── customers.csv
+│   ├── subscriptions.csv
+│   ├── payments.csv
+│   ├── support_interactions.csv
+│   ├── saas_advanced_data_generator.py
+│   └── saas_dax_cheatsheet.md
 sql/                                <- Reusable Databricks SQL logic
 │   ├── backorders.sql
 │   ├── date_table_build.sql
 │   ├── dtc_product_qtd_split.sql
 │   ├── qtd_revenue_vs_pypq.sql
 │   ├── qtd_production_trend.sql
+│   └── revenue_by_region.sql
 README.md                           <- Root overview (this file)
 ```
 

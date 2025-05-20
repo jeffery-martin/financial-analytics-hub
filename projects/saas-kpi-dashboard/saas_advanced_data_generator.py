@@ -722,11 +722,11 @@ def generate_advanced_saas_dataset():
 
     # Save to Google Drive
     print("Saving data to Google Drive...")
-    customers.to_csv(os.path.join(output_dir, 'customers_advanced.csv'), index=False)
-    all_subscriptions.to_csv(os.path.join(output_dir, 'subscriptions_advanced.csv'), index=False)
-    payments.to_csv(os.path.join(output_dir, 'payments_advanced.csv'), index=False)
-    usage.to_csv(os.path.join(output_dir, 'usage_events_advanced.csv'), index=False)
-    support_interactions.to_csv(os.path.join(output_dir, 'support_interactions.csv'), index=False)
+    customers.to_csv(os.path.join(output_dir, 'customers.csv'), index=False)
+    all_subscriptions.to_csv(os.path.join(output_dir, 'subscriptions.csv'), index=False)
+    payments.to_csv(os.path.join(output_dir, 'payments.csv'), index=False)
+    usage.to_csv(os.path.join(output_dir, 'usage_events.csv'), index=False)
+    support_interactions.to_csv(os.path.join(output_dir, 'support.csv'), index=False)
 
     # Generate summary statistics
     print(f"\nGenerated Advanced SaaS Dataset and saved to Google Drive:")

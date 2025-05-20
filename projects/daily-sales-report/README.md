@@ -56,17 +56,15 @@ This dashboard is powered by a set of Delta Live Table pipelines and scheduled n
 ## 📂 Project Structure
 
 ```
-projects/
-└── revenue-dashboard/
-    ├── README.md                      <- This file
-    ├── workflowdiagram.png            <- Pipeline architecture
-    ├── dailysalesreport1.png          <- Screenshot of main dashboard
-    ├── dailysalesreport2.png          <- Screenshot of current trend & variance charts
-    ├── dailysalesreport3.png          <- Screenshot of historical trends
-scripts/
-└── aop_load_pipeline.py              <- AOP Delta pipeline
-└── r12_revenue_pipeline.py           <- Regionsl QTD refresh job
-└── date_table_build.sql              <- Custom fiscal calendar
+daily-sales-report/
+├── DailySalesReport.pdf            <- Full report w/ daily scheduled refresh & email delivery
+├── README.md                       <- This file
+├── aop.ipynb                       <- AOP Delta pipeline
+├── r12_revenue.ipynb               <- Regional QTD refresh job
+├── dailysalesreport1.png           <- Screenshot of main dashboard
+├── dailysalesreport2.png           <- Screenshot of current trend & variance charts
+├── dailysalesreport3.png           <- Screenshot of historical trends
+└── workflowdiagram.png             <- Pipeline architecture
 ```
 
 ---

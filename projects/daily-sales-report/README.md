@@ -49,7 +49,7 @@ This dashboard is powered by a set of Delta Live Table pipelines and scheduled n
 * `R12_Revenue' (Region 1 & Region 2) is refreshed via a Python notebook
 * Final `QTD_Trend` table aggregates actuals vs targets weekly pacing
 
-![Workflow](workflowdiagram.png)
+![Workflow](workflow-diagram.png)
 
 ---
 

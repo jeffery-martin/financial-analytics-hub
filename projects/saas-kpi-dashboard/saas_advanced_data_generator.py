@@ -5,7 +5,12 @@ import random
 from faker import Faker
 import uuid
 import math
-from google.colab import drive
+# Google Drive mounting is only available in a Colab environment. Import it
+# conditionally so the script can run elsewhere as well.
+try:
+    from google.colab import drive  # type: ignore
+except ImportError:  # pragma: no cover - outside Colab
+    drive = None
 import os
 
 # Set up Faker for generating realistic data
@@ -690,11 +695,14 @@ def generate_advanced_saas_dataset():
     """
     generator = AdvancedSaaSDataGenerator()
 
-    print("Mounting Google Drive...")
-    drive.mount('/content/drive')  # Mount Google Drive
+    if drive is not None:
+        print("Mounting Google Drive...")
+        drive.mount('/content/drive')  # type: ignore[attr-defined]
+        output_dir = '/content/drive/My Drive/saas-kpi-dashboard'
+    else:
+        output_dir = os.path.join(os.getcwd(), 'saas-kpi-dashboard')
 
     # Define the directory where you want to save the data
-    output_dir = '/content/drive/My Drive/saas-kpi-dashboard'  # Changed to "saas-kpi-dashboard"
     # Create the directory if it doesn't exist
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
@@ -720,8 +728,8 @@ def generate_advanced_saas_dataset():
     print("Generating support interactions...")
     support_interactions = generator.generate_support_interactions(customers)
 
-    # Save to Google Drive
-    print("Saving data to Google Drive...")
+    # Save the generated files to the selected output directory
+    print(f"Saving data to {output_dir}...")
     customers.to_csv(os.path.join(output_dir, 'customers.csv'), index=False)
     all_subscriptions.to_csv(os.path.join(output_dir, 'subscriptions.csv'), index=False)
     payments.to_csv(os.path.join(output_dir, 'payments.csv'), index=False)

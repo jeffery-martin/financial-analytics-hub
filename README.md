@@ -48,16 +48,16 @@ projects/
 │   ├── dailysalesreport1.png
 │   ├── dailysalesreport2.png
 │   ├── dailysalesreport3.png
-│   └── workflowdiagram.png
+│   └── workflow-diagram.png
 ├── saas-kpi-dashboard/            <- Simulated SaaS analytics with ARR, churn, CAC, LTV
-│   ├── aggregations.ipynb
+│   ├── README.md
 │   ├── unit_economics.ipynb
+│   ├── saas_advanced_data_generator.py
+│   ├── data_generator_v2.py
 │   ├── customers.csv
 │   ├── subscriptions.csv
 │   ├── payments.csv
-│   ├── support_interactions.csv
-│   ├── saas_advanced_data_generator.py
-│   └── saas_dax_cheatsheet.md
+│   └── support_interactions.csv
 sql/                                <- Reusable Databricks SQL logic
 │   ├── backorders.sql
 │   ├── date_table_build.sql

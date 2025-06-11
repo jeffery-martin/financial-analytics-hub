@@ -64,7 +64,7 @@ daily-sales-report/
 ├── dailysalesreport1.png           <- Screenshot of main dashboard
 ├── dailysalesreport2.png           <- Screenshot of current trend & variance charts
 ├── dailysalesreport3.png           <- Screenshot of historical trends
-└── workflowdiagram.png             <- Pipeline architecture
+└── workflow-diagram.png            <- Pipeline architecture
 ```
 
 ---

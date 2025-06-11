@@ -6,6 +6,7 @@ from faker import Faker
 import uuid
 import math
 import os
+from dateutil.relativedelta import relativedelta
 
 fake = Faker()
 np.random.seed(42)

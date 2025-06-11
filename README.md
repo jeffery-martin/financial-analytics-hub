@@ -48,7 +48,7 @@ projects/
 │   ├── dailysalesreport1.png
 │   ├── dailysalesreport2.png
 │   ├── dailysalesreport3.png
-│   └── workflowdiagram.png
+│   └── workflow-diagram.png
 ├── saas-kpi-dashboard/            <- Simulated SaaS analytics with ARR, churn, CAC, LTV
 │   ├── aggregations.ipynb
 │   ├── unit_economics.ipynb

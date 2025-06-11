@@ -482,7 +482,10 @@ class AdvancedSaaSDataGenerator:
                         'customer_id': subscription['customer_id'],
                         'plan_name': addon_name,
                         'billing_frequency': subscription['billing_frequency'],
-                        'monthly_price': addon_info['price'] if addon_info.get('one_time') else addon_info['price'],
+                        # One-time add-ons should not contribute to monthly MRR
+                        'monthly_price': 0 if addon_info.get('one_time') else addon_info['price'],
+                        'one_time_price': addon_info['price'] if addon_info.get('one_time') else None,
+                        'one_time': addon_info.get('one_time', False),
                         'seats': 1,
                         'start_date': addon_start,
                         'end_date': addon_end,
@@ -506,6 +509,20 @@ class AdvancedSaaSDataGenerator:
         payments = []
 
         for _, subscription in subscriptions_df.iterrows():
+            # Handle one-time add-on charges upfront and skip recurring loop
+            if subscription.get('one_time'):
+                payments.append({
+                    'payment_id': str(uuid.uuid4()),
+                    'subscription_id': subscription['subscription_id'],
+                    'customer_id': subscription['customer_id'],
+                    'payment_date': subscription['start_date'],
+                    'amount': subscription['one_time_price'],
+                    'status': 'successful',
+                    'payment_method': random.choice(['Credit Card', 'ACH', 'Wire Transfer', 'PayPal']),
+                    'subscription_type': subscription['subscription_type']
+                })
+                continue
+
             current_date = subscription['start_date']
             end_date = subscription['end_date'] if subscription['end_date'] else self.end_date
 

@@ -4,11 +4,12 @@ import os
 # --- Define Paths ---
 # IMPORTANT: Make sure this DATA_DIR points to the folder
 # where your original 'usage_events.csv' (and other CSVs) are located.
+# This remains your iCloud path for the large file.
 DATA_DIR = "/Users/jeffmartin/Library/Mobile Documents/com~apple~CloudDocs/PyCharm"
 
 # Define the output directory for the aggregated CSVs.
-# You can use the same DATA_DIR or a new subfolder if you prefer.
-OUTPUT_DIR = DATA_DIR
+# This is now set to your cloned GitHub repo path.
+OUTPUT_DIR = "/Users/jeffmartin/PycharmProjects/financial-analytics-hub/projects/saas-kpi-dashboard"
 
 # Ensure the output directory exists
 os.makedirs(OUTPUT_DIR, exist_ok=True)

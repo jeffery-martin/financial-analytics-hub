@@ -25,8 +25,8 @@ class DataGenerator:
         Initializes the DataGenerator with a specified date range for data generation.
 
         Args:
-            start_date (str): The start date for data generation in YYYY-MM-DD format.
-            end_date (str): The end date for data generation in YYYY-MM-DD format.
+            start_date (str): The start date for data generation in (%Y-%m-%d) format.
+            end_date (str): The end date for data generation in (%Y-%m-%d) format.
         """
         self.start_date = datetime.strptime(start_date, "%Y-%m-%d")
         self.end_date = datetime.strptime(end_date, "%Y-%m-%d")
@@ -38,7 +38,7 @@ class DataGenerator:
                 'per_seat_price': 0,
                 'max_seats': 5,
                 'annual_discount': 0.10,
-                'base_churn_rate': 0.08,
+                'base_churn_rate': 0.10,  # Slightly increased from 0.08
                 'features': ['basic_analytics', 'email_support']
             },
             'Professional': {
@@ -46,7 +46,7 @@ class DataGenerator:
                 'per_seat_price': 15,
                 'max_seats': 50,
                 'annual_discount': 0.15,
-                'base_churn_rate': 0.05,
+                'base_churn_rate': 0.06,  # Slightly increased from 0.05
                 'features': ['advanced_analytics', 'integrations', 'phone_support']
             },
             'Business': {
@@ -54,7 +54,7 @@ class DataGenerator:
                 'per_seat_price': 25,
                 'max_seats': 200,
                 'annual_discount': 0.20,
-                'base_churn_rate': 0.03,
+                'base_churn_rate': 0.04,  # Slightly increased from 0.03
                 'features': ['custom_dashboards', 'api_access', 'dedicated_support']
             },
             'Enterprise': {
@@ -62,7 +62,7 @@ class DataGenerator:
                 'per_seat_price': 35,
                 'max_seats': 1000,
                 'annual_discount': 0.25,
-                'base_churn_rate': 0.015,
+                'base_churn_rate': 0.02,  # Slightly increased from 0.015
                 'features': ['white_label', 'sso', 'custom_integrations', 'customer_success_manager']
             }
         }
@@ -149,11 +149,19 @@ class DataGenerator:
             'Enterprise (1000+)': {'seats_tendency': 5.0, 'upgrade_tendency': 1.2, 'budget': 3.0, 'cac_multiplier': 3.0}
         }
 
-        # Base CAC for different acquisition channels
+        # Base CAC for different acquisition channels - SIGNIFICANTLY INCREASEED FOR LTV:CAC ADJUSTMENT
         base_cac_channel = {
-            'Organic Search': 100, 'Paid Search': 250, 'Social Media': 180, 'Referral': 50,
-            'Direct': 120, 'Content Marketing': 150, 'Trade Show': 500, 'Cold Outreach': 700,
-            'Partner': 300, 'Webinar': 200, 'Free Trial': 80
+            'Organic Search': 500,  # Increased from 100
+            'Paid Search': 1250,  # Increased from 250
+            'Social Media': 900,  # Increased from 180
+            'Referral': 250,  # Increased from 50
+            'Direct': 600,  # Increased from 120
+            'Content Marketing': 750,  # Increased from 150
+            'Trade Show': 2500,  # Increased from 500
+            'Cold Outreach': 3500,  # Increased from 700
+            'Partner': 1500,  # Increased from 300
+            'Webinar': 1000,  # Increased from 200
+            'Free Trial': 400  # Increased from 80
         }
 
         for i in range(num_customers):
@@ -319,9 +327,11 @@ class DataGenerator:
             seasonal_churn_factor = self.seasonal_patterns['churn'][month]
             monthly_churn_rate = base_churn_rate * seasonal_churn_factor
 
-            # Factor in plan type: higher plans tend to have lower churn
-            if plan in ['Business', 'Enterprise']:
-                monthly_churn_rate *= 0.7  # Reduce churn rate for higher plans
+            # Original: Factor in plan type: higher plans tend to have lower churn
+            # if plan in ['Business', 'Enterprise']:
+            #     monthly_churn_rate *= 0.7 # Reduce churn rate for higher plans
+            # REMOVED the multiplier to allow higher plans to have slightly higher churn pressure
+            # and contribute to bringing down LTV.
 
             if random.random() < monthly_churn_rate:
                 # Churn happens, return the last day of the current month
@@ -898,8 +908,8 @@ def generate_dataset():
     """
     generator = DataGenerator()
 
-    # Define output directory and ensure it exists
-    output_dir = '/Users/jeffmartin/Library/Mobile Documents/com~apple~CloudDocs/PyCharm'
+    # Define output directory to your cloned repo for easy commit/push
+    output_dir = '/Users/jeffmartin/PycharmProjects/financial-analytics-hub/projects/saas-kpi-dashboard'
     makedirs(output_dir, exist_ok=True)
 
     print("Generating customers...")
@@ -937,17 +947,18 @@ def generate_dataset():
         customer_payments = pd.DataFrame(columns=['customer_id', 'Total_Revenue'])
 
     # Merge total revenue back to customers
-    customers_final = customers.merge(customer_payments, on='customer_id', how='left').fillna({'Total_Revenue': 0})
+    customers_with_revenue = customers.merge(customer_payments, on='customer_id', how='left').fillna(
+        {'Total_Revenue': 0})
 
     # Add CAC to customers_final (already exists in customers DataFrame)
-    customers_final.rename(columns={'acquisition_cost': 'CAC'}, inplace=True)
-    customers_final['CAC'] = customers_final['CAC'].fillna(0)  # Ensure no NaN CAC
+    customers_with_revenue.rename(columns={'acquisition_cost': 'CAC'}, inplace=True)
+    customers_with_revenue['CAC'] = customers_with_revenue['CAC'].fillna(0)  # Ensure no NaN CAC
 
     # Calculate LTV: For this dataset, LTV is simply the total revenue generated
-    customers_final['LTV'] = customers_final['Total_Revenue']
+    customers_with_revenue['LTV'] = customers_with_revenue['Total_Revenue']
 
     # Calculate LTV_CAC_Ratio, handling division by zero
-    customers_final['LTV_CAC_Ratio'] = customers_final.apply(
+    customers_with_revenue['LTV_CAC_Ratio'] = customers_with_revenue.apply(
         lambda row: row['LTV'] / row['CAC'] if row['CAC'] > 0 else 0, axis=1
     )
 
@@ -961,8 +972,8 @@ def generate_dataset():
             (customer_active_dates['last_active'] - customer_active_dates['first_active']).dt.days / 30.4
     ).apply(lambda x: max(1, x))  # Ensure at least 1 month if active
 
-    customers_final = customers_final.merge(customer_active_dates[['customer_id', 'actual_active_months']],
-                                            on='customer_id', how='left').fillna({'actual_active_months': 1})
+    customers_final = customers_with_revenue.merge(customer_active_dates[['customer_id', 'actual_active_months']],
+                                                   on='customer_id', how='left').fillna({'actual_active_months': 1})
 
     # Calculate Average Monthly Revenue for CAC Payback (using total revenue over active months)
     customers_final['Monthly_Revenue'] = customers_final['Total_Revenue'] / customers_final['actual_active_months']

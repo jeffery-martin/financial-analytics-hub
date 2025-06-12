@@ -13,10 +13,10 @@ st.set_page_config(
 )
 
 # --- Define the path to your data files ---
-# IMPORTANT: Update this path to where your CSV files are located!
-# Since all CSVs are now in the same directory as the Streamlit script in your GitHub repo,
-# you can use "." for the current directory.
-DATA_DIR = "."
+# IMPORTANT: This now dynamically sets DATA_DIR to the directory
+# where this script (saas_dashboard.py) is located.
+# Ensure your CSV files are in the SAME directory as this script.
+DATA_DIR = os.path.dirname(__file__)
 
 # --- Data Loading Function with Caching ---
 # @st.cache_data decorator caches the DataFrame so it's loaded only once,

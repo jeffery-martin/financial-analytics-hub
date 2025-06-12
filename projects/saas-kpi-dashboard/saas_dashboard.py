@@ -14,7 +14,9 @@ st.set_page_config(
 
 # --- Define the path to your data files ---
 # IMPORTANT: Update this path to where your CSV files are located!
-DATA_DIR = "/Users/jeffmartin/Library/Mobile Documents/com~apple~CloudDocs/PyCharm"
+# Since all CSVs are now in the same directory as the Streamlit script in your GitHub repo,
+# you can use "." for the current directory.
+DATA_DIR = "."
 
 # --- Data Loading Function with Caching ---
 # @st.cache_data decorator caches the DataFrame so it's loaded only once,
@@ -29,7 +31,12 @@ def load_data():
         customers_df = pd.read_csv(os.path.join(DATA_DIR, 'unit_economics.csv'))
         subscriptions_df = pd.read_csv(os.path.join(DATA_DIR, 'subscriptions.csv'))
         payments_df = pd.read_csv(os.path.join(DATA_DIR, 'payments.csv'))
-        usage_df = pd.read_csv(os.path.join(DATA_DIR, 'usage_events.csv'))
+
+        # Load aggregated usage data instead of the large raw file
+        monthly_usage_summary_df = pd.read_csv(os.path.join(DATA_DIR, 'monthly_usage_summary.csv'))
+        top_features_summary_df = pd.read_csv(os.path.join(DATA_DIR, 'top_features_summary.csv'))
+        customer_usage_summary_df = pd.read_csv(os.path.join(DATA_DIR, 'customer_usage_summary.csv'))
+
         support_df = pd.read_csv(os.path.join(DATA_DIR, 'support_interactions.csv'))
         segments_df = pd.read_csv(os.path.join(DATA_DIR, 'unit_economics_by_segment.csv'))
 
@@ -49,17 +56,18 @@ def load_data():
             if col in payments_df.columns:
                 payments_df[col] = pd.to_datetime(payments_df[col], errors='coerce')
 
-        date_cols_usage = ['event_date']
-        for col in date_cols_usage:
-            if col in usage_df.columns:
-                usage_df[col] = pd.to_datetime(usage_df[col], errors='coerce')
+        # Convert 'Month' column in monthly_usage_summary_df to datetime
+        if 'Month' in monthly_usage_summary_df.columns:
+            monthly_usage_summary_df['Month'] = pd.to_datetime(monthly_usage_summary_df['Month'], errors='coerce')
 
         date_cols_support = ['interaction_date']
         for col in date_cols_support:
             if col in support_df.columns:
                 support_df[col] = pd.to_datetime(support_df[col], errors='coerce')
 
-        return customers_df, subscriptions_df, payments_df, usage_df, support_df, segments_df
+        return customers_df, subscriptions_df, payments_df, \
+               monthly_usage_summary_df, top_features_summary_df, customer_usage_summary_df, \
+               support_df, segments_df
     except FileNotFoundError:
         st.error(f"Error: One or more CSV files not found in '{DATA_DIR}'. "
                  f"Please ensure your data is in the correct directory and the path is set correctly.")
@@ -68,8 +76,10 @@ def load_data():
         st.error(f"An error occurred while loading data: {e}")
         st.stop()
 
-# Load data at the start of the script
-customers_df, subscriptions_df, payments_df, usage_df, support_df, segments_df = load_data()
+# Load data at the start of the script, updating variable names for usage data
+customers_df, subscriptions_df, payments_df, \
+monthly_usage_summary_df, top_features_summary_df, customer_usage_summary_df, \
+support_df, segments_df = load_data()
 
 # --- Title and Introduction ---
 st.title("📊 SaaS KPI Dashboard")
@@ -84,18 +94,19 @@ subscription dynamics, revenue, product usage, and support efficiency.
 st.sidebar.header("Global Filters")
 
 # Date Range Slider for filtering data across all sections
+# Now using monthly_usage_summary_df for overall date range determination
 min_date = min(
     customers_df['acquisition_date'].min(),
     subscriptions_df['start_date'].min(),
     payments_df['payment_date'].min(),
-    usage_df['event_date'].min(),
+    monthly_usage_summary_df['Month'].min(), # Use Month from monthly_usage_summary
     support_df['interaction_date'].min()
 )
 max_date = max(
     customers_df['acquisition_date'].max(),
     subscriptions_df['start_date'].max(),
     payments_df['payment_date'].max(),
-    usage_df['event_date'].max(),
+    monthly_usage_summary_df['Month'].max(), # Use Month from monthly_usage_summary
     support_df['interaction_date'].max()
 )
 
@@ -132,10 +143,10 @@ filtered_payments_df = payments_df[
     (payments_df['payment_date'] <= end_date_filter)
 ]
 
-# For usage, filter by event_date
-filtered_usage_df = usage_df[
-    (usage_df['event_date'] >= start_date_filter) &
-    (usage_df['event_date'] <= end_date_filter)
+# For usage summary, filter by Month
+filtered_monthly_usage_summary_df = monthly_usage_summary_df[
+    (monthly_usage_summary_df['Month'] >= start_date_filter) &
+    (monthly_usage_summary_df['Month'] <= end_date_filter)
 ]
 
 # For support, filter by interaction_date
@@ -143,6 +154,14 @@ filtered_support_df = support_df[
     (support_df['interaction_date'] >= start_date_filter) &
     (support_df['interaction_date'] <= end_date_filter)
 ]
+
+# Note: top_features_summary_df and customer_usage_summary_df are not filtered by date range
+# directly here because they represent overall aggregates. If you needed
+# date-range specific top features or customer usage summaries,
+# you would need to re-aggregate from the original large file within the date range,
+# which is generally not feasible for large files in a dashboard.
+# The current approach assumes these aggregations are for the entire dataset,
+# or are sufficiently small that they don't cause performance issues if re-calculated.
 
 # --- Section: Executive Summary (Key Metrics) ---
 st.header("Executive Summary")
@@ -323,46 +342,42 @@ st.markdown("Understand how customers interact with your product features.")
 usage_kpi_col1, usage_kpi_col2, usage_kpi_col3 = st.columns(3)
 
 with usage_kpi_col1:
-    total_usage_events = filtered_usage_df['event_id'].nunique() if not filtered_usage_df.empty else 0
+    # Use Total_Usage_Events from the monthly summary
+    total_usage_events = filtered_monthly_usage_summary_df['Total_Usage_Events'].sum() if not filtered_monthly_usage_summary_df.empty else 0
     st.metric("Total Usage Events", f"{total_usage_events:,}")
 
 with usage_kpi_col2:
-    # Only consider customers who had usage events in the filtered period
-    active_customers_in_usage = filtered_usage_df['customer_id'].nunique() if not filtered_usage_df.empty else 0
-    st.metric("Customers with Usage", f"{active_customers_in_usage:,}")
+    # Use Unique_Customers_With_Usage from the monthly summary
+    customers_with_usage = filtered_monthly_usage_summary_df['Unique_Customers_With_Usage'].sum() if not filtered_monthly_usage_summary_df.empty else 0
+    st.metric("Customers with Usage", f"{customers_with_usage:,}")
 
 with usage_kpi_col3:
-    if not filtered_usage_df.empty:
-        # Calculate average daily usage events per customer (considering customers with usage)
-        avg_daily_events_per_customer = filtered_usage_df.groupby('customer_id').size().mean() / (filtered_usage_df['event_date'].max() - filtered_usage_df['event_date'].min()).days if not filteredusage_df.empty else 0
-        st.metric("Avg. Daily Events/Customer", f"{avg_daily_events_per_customer:,.2f}")
-    else:
-        st.metric("Avg. Daily Events/Customer", "N/A")
+    # Use Avg_Daily_Events_Per_Customer from customer_usage_summary_df
+    avg_daily_events_overall = customer_usage_summary_df['Avg_Daily_Events_Per_Customer'].mean() if not customer_usage_summary_df.empty else 0
+    st.metric("Avg. Daily Events/Customer (Overall)", f"{avg_daily_events_overall:,.2f}")
 
 
-st.subheader("Top Used Features")
-if not filtered_usage_df.empty:
-    feature_counts = filtered_usage_df['feature_used'].value_counts().head(10).reset_index()
-    feature_counts.columns = ['Feature', 'Count']
-    fig_features = px.bar(feature_counts, x='Feature', y='Count',
+st.subheader("Top Used Features (Overall)")
+if not top_features_summary_df.empty:
+    # Use the pre-aggregated top features
+    fig_features = px.bar(top_features_summary_df.head(10), x='Feature', y='Count',
                           title='Top 10 Most Used Features',
                           color='Count', # Color by count for visual hierarchy
                           color_continuous_scale=px.colors.sequential.Teal)
     st.plotly_chart(fig_features, use_container_width=True)
 else:
-    st.info("No usage data for the selected date range.")
+    st.info("No top features data available.")
 
 st.subheader("Usage Events Over Time")
-if not filtered_usage_df.empty:
-    usage_trend = filtered_usage_df.groupby(pd.Grouper(key='event_date', freq='M')).size().reset_index(name='Events')
-    usage_trend.columns = ['Month', 'Events']
-    fig_usage_trend = px.line(usage_trend, x='Month', y='Events',
+if not filtered_monthly_usage_summary_df.empty:
+    # Use the filtered monthly usage summary for the trend chart
+    fig_usage_trend = px.line(filtered_monthly_usage_summary_df, x='Month', y='Total_Usage_Events',
                               title='Total Usage Events by Month',
-                              labels={'Events': 'Total Events', 'Month': 'Month'})
+                              labels={'Total_Usage_Events': 'Total Events', 'Month': 'Month'})
     fig_usage_trend.update_traces(mode='lines+markers')
     st.plotly_chart(fig_usage_trend, use_container_width=True)
 else:
-    st.info("No usage data for the selected date range.")
+    st.info("No monthly usage data for the selected date range.")
 
 st.markdown("---")
 
@@ -417,7 +432,7 @@ st.markdown("---")
 
 # --- Section: Detailed Data View (Expanders) ---
 st.header("Detailed Data Views")
-st.markdown("Explore the raw data used in this dashboard.")
+st.markdown("Explore the raw and aggregated data used in this dashboard.")
 
 with st.expander("View Customers Data"):
     st.dataframe(filtered_customers_df)
@@ -428,8 +443,14 @@ with st.expander("View Subscriptions Data"):
 with st.expander("View Payments Data"):
     st.dataframe(filtered_payments_df)
 
-with st.expander("View Usage Events Data"):
-    st.dataframe(filtered_usage_df)
+with st.expander("View Monthly Usage Summary Data"):
+    st.dataframe(filtered_monthly_usage_summary_df)
+
+with st.expander("View Top Features Summary Data"):
+    st.dataframe(top_features_summary_df)
+
+with st.expander("View Customer Usage Summary Data"):
+    st.dataframe(customer_usage_summary_df)
 
 with st.expander("View Support Interactions Data"):
     st.dataframe(filtered_support_df)

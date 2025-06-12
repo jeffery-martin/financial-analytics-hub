@@ -1,6 +1,6 @@
 # 📊 SaaS KPI Dashboard: Data Generation & Analytics
 
-This project showcases a complete end-to-end pipeline for generating synthetic SaaS (Software-as-a-Service) customer data and visualizing key performance indicators (KPIs) through an interactive dashboard. Designed to reflect the type of modeling and insight generation that powers data-driven GTM, retention, and monetization strategy at high-growth software companies.
+This project simulates a complete end-to-end SaaS data pipeline. It generates synthetic customer-level data and visualizes KPIs through an interactive dashboard. Designed to reflect the type of modeling and insight generation that powers data-driven GTM, retention, and monetization strategy at high-growth software companies.
 
 This project includes a full pipeline for generating, enriching, and segmenting SaaS data—delivering visibility into CAC, LTV, churn risk, health scoring, and customer behavior across segments. Driven by this pipeline is a dashboard visualizing the core unit economics and customer health metrics. It is specifically designed to provide strategic visibility into revenue efficiency, retention trends, and GTM performance across customer segments.
 
@@ -27,7 +27,7 @@ Calculate core SaaS KPIs at the customer level and aggregate them for segment an
 * CAC Payback Period
 * LTV\:CAC Ratio
 * Usage & Support Sentiment Metrics
-* Customer Health Score & Churn Flag
+* Customer Health Score & Churn Flag (0 = unhealthy, 1 = very healthy)
 
 Build a dynamic and intuitive KPI dashboard for strategic visibility into revenue efficiency, retention trends, and Go-To-Market (GTM) performance.
 
@@ -54,7 +54,7 @@ Tuning targets a realistic LTV\:CAC ratio (aiming for 4-10x).
 
 Raw usage events can exceed 1GB. This script:
 
-* Loads the raw `usage_events.csv`.
+* Loads the raw `usage_events.csv` locally (can be adapted to automated ETL jobs).
 * Aggregates data:
 
   * Monthly Usage Summary
@@ -162,7 +162,7 @@ projects/saas-kpi-dashboard/
 
 ## 🚀 Future Enhancements
 
-* Multi-period Cohort Analysis
+* Multi-period Cohort Analysis *(High Priority)*
 * Pricing Experiment Simulations
 * Scenario Modeling ("what-if")
 * Predictive Churn Modeling with ML
@@ -186,3 +186,4 @@ All data is synthetic and anonymized. No real customers or financials.
 I'm passionate about building data analytics solutions for business insights. Connect with me:
 
 * [LinkedIn](https://www.linkedin.com/in/jeffery-martin/)
+* [GitHub](https://github.com/jtmartin18/financial-analytics-hub)

@@ -5,7 +5,7 @@ import random
 from faker import Faker
 import uuid
 import math
-import os
+from os import path, makedirs
 from dateutil.relativedelta import relativedelta
 
 fake = Faker()

@@ -46,7 +46,7 @@ This dashboard is powered by a set of Delta Live Table pipelines and scheduled n
 
 * `Product_Split` and `Backorders` Delta tables refresh first
 * `QTD_Revenue` are calculated using latest SAP loads
-* `R12_Revenue' (Region 1 & Region 2) is refreshed via a Python notebook
+* `R12_Revenue` (Region 1 & Region 2) is refreshed via a Python notebook
 * Final `QTD_Trend` table aggregates actuals vs targets weekly pacing
 
 ![Workflow](workflow-diagram.png)

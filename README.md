@@ -8,7 +8,7 @@ Each project blends technical execution — using Databricks, Delta Lake, and Po
 
 ## 🚀 Featured Project: Daily Sales Report
 
-A daily-refreshing dashboard that tracks quarter-to-date (QTD) revenue, backorders, and production pacing against plan. Built using Databricks Delta pipelines and SAP extracts.
+A daily-refreshing dashboard that tracks quarter-to-date (QTD) revenue, backorders, and revenue pacing against plan. Built using Databricks Delta pipelines and SAP extracts.
 
 ### 📸 Preview
 
@@ -72,4 +72,4 @@ README.md                           <- Root overview (this file)
 
 ## 🔐 Note on Proprietary Data
 
-> *This project uses publicly shareable dummy data. All values, dimensions, and visuals have been sanitized and do not reflect actual financials. The code demonstrates technical implementation only.*
+> *All projects use publicly shareable dummy data. All values, dimensions, and visuals have been sanitized and do not reflect actual financials. The code demonstrates technical implementation only.*

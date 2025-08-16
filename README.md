@@ -19,7 +19,7 @@ A daily-refreshing dashboard that tracks quarter-to-date (QTD) revenue, backorde
 > Below is the pipeline powering the daily-refreshing dashboard, built using Delta Lake and Databricks Jobs with SQL and PySpark notebooks. Tasks include product splits, backorder refreshes, and revenue tracking — all orchestrated in a dependency-aware DAG.
 
 <div align="center">
-  <img src="projects/daily-sales-report/workflow-diagram.png" alt="Databricks Workflow Diagram" width="1000"/>
+  <img src="projects/daily-sales-report/workflow-diagram.svg" alt="Databricks Workflow Diagram" width="1000"/>
 </div>
 
 ### 🔗 View full project → [Daily Sales Report](projects/daily-sales-report/README.md)

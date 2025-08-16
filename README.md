@@ -12,7 +12,7 @@ A daily-refreshing dashboard that tracks quarter-to-date (QTD) revenue, backorde
 
 ### 📸 Preview
 
-![Daily Sales Report Page 1](projects/daily-sales-report/dailysalesreport1.png)
+![Daily Sales Report Page 1](projects/daily-sales-report/daily-sales-report-1.svg)
 
 ### 🔄 ETL Architecture: Databricks Workflow
 

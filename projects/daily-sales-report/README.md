@@ -1,6 +1,6 @@
 # Revenue Dashboard
 
-This Power BI dashboard provides a daily revenue snapshot across a global healthcare business. It integrates SAP transactional level data, AOP targets, and production logic across product lines, channels, and regions using Databricks pipelines and Delta Lake architecture.
+This Power BI dashboard provides a daily revenue snapshot across a global healthcare business. It integrates SAP transactional level data, AOP targets, and revenue pacing logic across product lines, channels, and regions using Databricks pipelines and Delta Lake architecture.
 
 ---
 

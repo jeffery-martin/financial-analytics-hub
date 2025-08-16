@@ -28,11 +28,11 @@ The report contains two main pages:
 <details>
   <summary>📷 Preview (click to expand)</summary>
 
-![Page 1](dailysalesreport1.png)
+![Page 1](daily-sales-report-1.svg)
 
-![Page 2](dailysalesreport2.png)
+![Page 2](daily-sales-report-2.svg)
 
-![Page 3](dailysalesreport3.png)
+![Page 3](daily-sales-report-3.svg)
 
 </details>
 

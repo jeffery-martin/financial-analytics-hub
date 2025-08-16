@@ -6,7 +6,7 @@ This Power BI dashboard provides a daily revenue snapshot across a global health
 
 ## 📊 Dashboard Overview
 
-The report contains two main pages:
+The report contains three main pages:
 
 **Page 1 – Daily Output Table**
 
@@ -17,7 +17,7 @@ The report contains two main pages:
 
 **Page 2 – Time Series View**
 
-* Cumulative Actual vs AOP by Selling Day
+* Cumulative Actual vs LBE by Selling Day
 * Daily variance visualized across the quarter
 
 **Page 3 – Historical Trends**
@@ -57,14 +57,14 @@ This dashboard is powered by a set of Delta Live Table pipelines and scheduled n
 
 ```
 daily-sales-report/
-├── DailySalesReport.pdf            <- Full report w/ daily scheduled refresh & email delivery
+├── daily-sales-report-full.pdf     <- Full report w/ daily scheduled refresh & email delivery
 ├── README.md                       <- This file
 ├── aop.ipynb                       <- AOP Delta pipeline
 ├── r12_revenue.ipynb               <- Regional QTD refresh job
-├── dailysalesreport1.png           <- Screenshot of main dashboard
-├── dailysalesreport2.png           <- Screenshot of current trend & variance charts
-├── dailysalesreport3.png           <- Screenshot of historical trends
-└── workflow-diagram.png            <- Pipeline architecture
+├── daily-sales-report-1.svg        <- Screenshot of main dashboard
+├── daily-sales-report-2.svg        <- Screenshot of current trend & variance charts
+├── daily-sales-report-3.svg        <- Screenshot of historical trends
+└── workflow-diagram.svg            <- Pipeline architecture
 ```
 
 ---

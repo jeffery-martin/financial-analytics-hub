@@ -49,7 +49,7 @@ This dashboard is powered by a set of Delta Live Table pipelines and scheduled n
 * `R12_Revenue` (Region 1 & Region 2) is refreshed via a Python notebook
 * Final `QTD_Trend` table aggregates actuals vs targets weekly pacing
 
-![Workflow](workflow-diagram.png)
+![Workflow](workflow-diagram.svg)
 
 ---
 
@@ -57,14 +57,20 @@ This dashboard is powered by a set of Delta Live Table pipelines and scheduled n
 
 ```
 daily-sales-report/
-├── daily-sales-report-full.pdf     <- Full report w/ daily scheduled refresh & email delivery
-├── README.md                       <- This file
-├── aop.ipynb                       <- AOP Delta pipeline
-├── r12_revenue.ipynb               <- Regional QTD refresh job
-├── daily-sales-report-1.svg        <- Screenshot of main dashboard
-├── daily-sales-report-2.svg        <- Screenshot of current trend & variance charts
-├── daily-sales-report-3.svg        <- Screenshot of historical trends
-└── workflow-diagram.svg            <- Pipeline architecture
+│   │   ├── README.md                           <= Project overview
+│   │   ├── daily-sales-report-full.pdf         <= Full daily report (refresh + email delivery)
+│   │   ├── daily-sales-report-1.svg            <= Main dashboard
+│   │   ├── daily-sales-report-2.svg            <= Trend & variance charts
+│   │   ├── daily-sales-report-3.svg            <= Historical trends of revenue pacing to targets
+│   │   ├── workflow-diagram.svg                <= Pipeline architecture diagram
+│   │   └── code/
+│   │       ├── aop.ipynb                       <= AOP Delta pipeline
+│   │       ├── r12_revenue.ipynb               <= Regional QTD refresh job
+│   │       ├── qtd_revenue_vs_pypq.sql         <= QTD revenue vs prior quarter query
+│   │       ├── qtd_production_trend.sql        <= Daily QTD production trend query
+│   │       ├── dtc_product_qtd_split.sql       <= Direct-to-consumer QTD split query
+│   │       ├── backorders.sql                  <= Backorder logic query
+│   │       └── date_table_build.sql            <= Fiscal date table builder w/ enhancements
 ```
 
 ---

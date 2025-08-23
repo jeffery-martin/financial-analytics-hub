@@ -17,5 +17,5 @@ class DefaultConfig:
     #APP_TYPE = "MultiTenant" You can use this if testing locally
     APP_TENANTID = "da77ffb1-ac97-492b-9f99-aec375868c10" # This is the tenant ID for the bot service.
     DATABRICKS_SPACE_ID="01f052b47d04167a84e7e866d4316efc"
-    DATABRICKS_HOST="mdt-diabetes-dip-analytics-prod.cloud.databricks.com"
+    DATABRICKS_HOST="https://mdt-diabetes-dip-analytics-prod.cloud.databricks.com"
     DATABRICKS_TOKEN="dapi4ba8d9f34cf4850819c20bbcbe4bc530"
